@@ -8,7 +8,6 @@ Home.loader = async function () {
 
 function Home() {
   const items = useLoaderData();
-  console.log(items);
   return (
     <div className={styles.container}>
       {items.map((product) => (

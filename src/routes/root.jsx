@@ -18,7 +18,7 @@ function Root() {
         <Link to="cart" className={styles.cart} aria-label="Shopping cart">
           <img src={CartIcon} alt="" />
         </Link>
-        <p>{numItems}</p>
+        <p data-testid="cart-size">{numItems}</p>
       </nav>
       <Outlet />
     </>
