@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigation } from "react-router-dom";
 import styles from "../styles/root.module.css";
 import CartIcon from "../assets/cart.svg";
+import Loader from "../components/Loader";
 
 function Root() {
+  const navigation = useNavigation();
   const [cart, setCart] = useState(new Map());
 
   function addToCart(product, increment) {
@@ -35,7 +37,11 @@ function Root() {
         </Link>
         <p data-testid="cart-size">{numItems}</p>
       </nav>
-      <Outlet context={{ cart, addToCart }} />
+      {navigation.state === "loading" ? (
+        <Loader />
+      ) : (
+        <Outlet context={{ cart, addToCart }} />
+      )}
     </>
   );
 }
