@@ -1,0 +1,16 @@
+.errorPage {
+  position: absolute;
+  padding: 32px;
+}
+
+.errorPage > * {
+  margin: 32px;
+}
+
+.errorPage > h1 {
+  font-weight: normal;
+}
+
+.errorPage > a {
+  color: #7e22ce;
+}
