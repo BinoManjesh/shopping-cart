@@ -17,9 +17,6 @@
 }
 
 .product > h2 {
-  font-size: 1.1em;
-  font-family: Georgia, "Times New Roman", Times, serif;
-  font-weight: normal;
   max-height: 100%;
   max-width: 100%;
   overflow: hidden;
