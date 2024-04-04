@@ -4,7 +4,7 @@ import styles from "../styles/root.module.css";
 import CartIcon from "../assets/cart.svg";
 
 function Root() {
-  const [cart] = useState(new Map());
+  const [cart, setCart] = useState(new Map());
   let numItems = 0;
   for (const [, value] of cart) {
     numItems += value;
@@ -20,7 +20,7 @@ function Root() {
         </Link>
         <p data-testid="cart-size">{numItems}</p>
       </nav>
-      <Outlet />
+      <Outlet context={{ cart, setCart }} />
     </>
   );
 }

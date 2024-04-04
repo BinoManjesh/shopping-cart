@@ -1,4 +1,4 @@
-import { shape, string, number } from "prop-types";
+import { shape, string, number, node } from "prop-types";
 import styles from "../styles/Product.module.css";
 
 Product.propTypes = {
@@ -11,9 +11,10 @@ Product.propTypes = {
       count: number,
     }),
   }),
+  children: node,
 };
 
-function Product({ product }) {
+function Product({ product, children }) {
   return (
     <div className={styles.product}>
       <img className={styles.img} src={product.image} alt={product.title} />
@@ -23,6 +24,7 @@ function Product({ product }) {
         <span className={styles.star}>★</span> ({product.rating.count})
       </p>
       <p>$ {product.price}</p>
+      <div>{children}</div>
     </div>
   );
 }

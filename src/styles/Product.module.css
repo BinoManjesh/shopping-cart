@@ -8,10 +8,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 250px;
   background-color: white;
   padding: 24px;
-  height: 400px;
+  height: 425px;
   font-size: x-large;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   gap: 5px;
@@ -31,8 +30,10 @@
 
 .img {
   composes: border;
+  background-color: white;
   width: 250px;
   height: 250px;
+  flex-shrink: 0;
 }
 
 .star {
