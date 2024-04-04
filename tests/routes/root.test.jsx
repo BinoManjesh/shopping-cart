@@ -14,6 +14,7 @@ vi.mock("react-router-dom", () => {
       outletContext = context;
       return <></>;
     },
+    useNavigation: () => ({ state: "idle" }),
   };
 });
 
