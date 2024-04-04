@@ -26,29 +26,49 @@ describe("Root component", () => {
 
   it("works for cart with 1 item", () => {
     render(<Root />);
-    const { cart, setCart } = outletContext;
+    const { addToCart } = outletContext;
 
     act(() => {
-      const newCart = new Map(cart);
-      newCart.set(3, 1);
-      setCart(newCart);
+      addToCart(3, 1);
     });
 
     expect(screen.getByTestId("cart-size").textContent).toBe("1");
   });
 
-  it("works for cart with multiple item", () => {
+  it("works for cart with multiple items", () => {
     render(<Root />);
-    const { cart, setCart } = outletContext;
+    const { addToCart } = outletContext;
 
     act(() => {
-      const newCart = new Map(cart);
-      newCart.set(3, 3);
-      newCart.set(4, 5);
-      newCart.set(2, 7);
-      setCart(newCart);
+      addToCart(3, 1);
+      addToCart(3, 1);
+      addToCart(3, 1);
+      addToCart(4, 1);
+      addToCart(4, -1);
+      addToCart(4, 1);
+      addToCart(5, 1);
+      addToCart(5, 1);
+      addToCart(5, 1);
+      addToCart(5, 1);
     });
 
-    expect(screen.getByTestId("cart-size").textContent).toBe("" + (3 + 5 + 7));
+    expect(screen.getByTestId("cart-size").textContent).toBe("8");
+  });
+
+  it("prevents negative counts", () => {
+    render(<Root />);
+    const { addToCart } = outletContext;
+
+    act(() => {
+      addToCart(3, 1);
+      addToCart(3, -1);
+      addToCart(3, -1);
+      addToCart(3, -1);
+
+      addToCart(4, 1);
+      addToCart(4, 1);
+    });
+
+    expect(screen.getByTestId("cart-size").textContent).toBe("2");
   });
 });

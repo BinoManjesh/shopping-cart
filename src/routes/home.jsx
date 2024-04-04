@@ -9,12 +9,12 @@ Home.loader = async function () {
 
 function Home() {
   const items = useLoaderData();
-  const { cart, setCart } = useOutletContext();
+  const { cart, addToCart } = useOutletContext();
   return (
     <div className={styles.container}>
       {items.map((product) => (
         <Product key={product.id} product={product}>
-          <CartManager cart={cart} setCart={setCart} productId={product.id} />
+          <CartManager cart={cart} addToCart={addToCart} product={product} />
         </Product>
       ))}
     </div>

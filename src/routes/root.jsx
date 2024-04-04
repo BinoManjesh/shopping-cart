@@ -5,9 +5,24 @@ import CartIcon from "../assets/cart.svg";
 
 function Root() {
   const [cart, setCart] = useState(new Map());
+
+  function addToCart(product, increment) {
+    setCart((cart) => {
+      const newCart = new Map(cart);
+      newCart.set(product.id, {
+        count: (cart.get(product.id) || { count: 0 }).count + increment,
+        product,
+      });
+      if (newCart.get(product.id).count <= 0) {
+        newCart.delete(product.id);
+      }
+      return newCart;
+    });
+  }
+
   let numItems = 0;
   for (const [, value] of cart) {
-    numItems += value;
+    numItems += value.count;
   }
   return (
     <>
@@ -20,7 +35,7 @@ function Root() {
         </Link>
         <p data-testid="cart-size">{numItems}</p>
       </nav>
-      <Outlet context={{ cart, setCart }} />
+      <Outlet context={{ cart, addToCart }} />
     </>
   );
 }

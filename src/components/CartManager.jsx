@@ -3,28 +3,19 @@ import styles from "../styles/CartManager.module.css";
 
 CartManager.propTypes = {
   cart: PropTypes.instanceOf(Map),
-  setCart: PropTypes.func,
-  productId: PropTypes.number,
+  addToCart: PropTypes.func,
+  product: PropTypes.shape({
+    id: PropTypes.number,
+  }),
 };
 
-function CartManager({ cart, setCart, productId }) {
-  function addToCart(increment) {
-    setCart((cart) => {
-      const newCart = new Map(cart);
-      newCart.set(productId, (cart.get(productId) || 0) + increment);
-      if (newCart.get(productId) <= 0) {
-        newCart.delete(productId);
-      }
-      return newCart;
-    });
-  }
-
+function CartManager({ cart, addToCart, product }) {
   return (
     <>
       <div className={styles.controls}>
-        <button onClick={() => addToCart(1)}>+</button>
-        <p>{cart.get(productId) || 0}</p>
-        <button onClick={() => addToCart(-1)}>-</button>
+        <button onClick={() => addToCart(product, 1)}>+</button>
+        <p>{(cart.get(product.id) || { count: 0 }).count}</p>
+        <button onClick={() => addToCart(product, -1)}>-</button>
       </div>
     </>
   );
